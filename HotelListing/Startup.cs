@@ -27,9 +27,21 @@ namespace HotelListing
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(o =>
+            {
+                o.AddPolicy(name: "AllowAll",
+                    builder =>
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                );
+            });
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "HotelListing", Version = "v1"});
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo {Title = "Hotel Listing", Version = "v1", Description = "Hotel Listing API"});
             });
         }
 
@@ -45,6 +57,8 @@ namespace HotelListing
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelListing v1"));
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 
