@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+
 namespace HotelListing.Data
 {
     public class Country
@@ -7,5 +10,7 @@ namespace HotelListing.Data
         public string Name { get; set; }
 
         public string ShortName { get; set; }
+
+        public virtual IList<Hotel> Hotels { get; set; }
     }
 }

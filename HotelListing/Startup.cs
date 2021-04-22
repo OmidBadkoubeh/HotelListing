@@ -31,12 +31,12 @@ namespace HotelListing
             services.AddControllers();
 
             services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
+                options.UseNpgsql(Configuration.GetConnectionString("PostgresConnection"))
             );
 
             services.AddCors(o =>
             {
-                o.AddPolicy(name: "AllowAll",
+                o.AddPolicy("AllowAll",
                     builder =>
                         builder.AllowAnyOrigin()
                             .AllowAnyMethod()
@@ -54,10 +54,7 @@ namespace HotelListing
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelListing v1"));
