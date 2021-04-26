@@ -40,7 +40,7 @@ namespace HotelListing.Repository
 
             if (orderBy != null)
             {
-                query = query.OrderBy(orderBy);
+                query = query.OrderBy((x) => x);
             }
 
             return await query.AsNoTracking().ToListAsync();
