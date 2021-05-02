@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using HotelListing.IRepository;
@@ -14,9 +13,9 @@ namespace HotelListing.Controllers
     [Route("api/[controller]")]
     public class CountryController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CountryController(IUnitOfWork unitOfWork, ILogger logger, IMapper mapper)
         {
@@ -50,7 +49,7 @@ namespace HotelListing.Controllers
             {
                 var country = await _unitOfWork.Countries.Get(country => country.Id == id, new List<string> {"Hotels"});
                 var result = _mapper.Map<CountryDTO>(country);
-                return Ok(result); 
+                return Ok(result);
                 // return Ok();
             }
             catch (Exception ex)

@@ -1,17 +1,15 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using HotelListing.Data;
 
 namespace HotelListing.Models
 {
     public class CreateHotelDTO
     {
         [Required]
-        [StringLength(maximumLength: 150, ErrorMessage = "Hotel name is too long!")]
+        [StringLength(150, ErrorMessage = "Hotel name is too long!")]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 250, ErrorMessage = "Hotel address is too long!")]
+        [StringLength(250, ErrorMessage = "Hotel address is too long!")]
         public string Address { get; set; }
 
         [Required]

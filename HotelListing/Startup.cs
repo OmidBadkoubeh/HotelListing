@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace HotelListing
@@ -28,7 +29,7 @@ namespace HotelListing
             services
                 .AddControllers()
                 .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 );
 
             services.AddDbContext<DatabaseContext>(options =>
