@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using HotelListing.IRepository;
 using Microsoft.AspNetCore.Mvc;
@@ -24,13 +25,15 @@ namespace HotelListing.Controllers
         {
             try
             {
-                var countries = _unitOfWork.Countries.GetAll();
+                var countries = await _unitOfWork.Countries.GetAll();
+                _logger.Debug($"OK! with ${countries}");
                 return Ok(countries);
+                // return Ok();
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, $"Something went wrong in the {nameof(GetCountries)}!");
-                return StatusCode(500);
+                _logger.Error(ex, $"Something went wrong in {nameof(GetCountries)}!");
+                return StatusCode(500, "Internal Server Error. Please try again later.");
             }
         }
     }
