@@ -21,7 +21,7 @@ namespace HotelListing.Repository
         }
 
         public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
+            Expression<Func<T, bool>> orderBy = null, List<string> includes = null)
         {
             IQueryable<T> query = _db;
 
@@ -40,7 +40,7 @@ namespace HotelListing.Repository
 
             if (orderBy != null)
             {
-                query = query.OrderBy((x) => x);
+                query = query.OrderBy(orderBy);
             }
 
             return await query.AsNoTracking().ToListAsync();

@@ -10,7 +10,7 @@ namespace HotelListing.IRepository
     {
         Task<IList<T>> GetAll(
             Expression<Func<T, bool>> expression = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            Expression<Func<T, bool>> orderBy = null,
             List<string> includes = null
         );
 
